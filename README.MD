@@ -1,4 +1,4 @@
-#unicorn
+# unicorn
 
 unicorn generates email random email alias address for self hosted https://mailinabox.email/ servers.
 The motivation behind this is to have privacy for all the email addresses that we give out.
