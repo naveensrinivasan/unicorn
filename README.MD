@@ -15,3 +15,6 @@ password: password
 
 This will generate a random email alias based on the settings `87AA8A3D-4385-348F-CDB6-3FE9617A22E4@email.xyz` 
 mapping a forward to the original email address which is also in the `settings.yaml`.
+
+## Download
+https://github.com/naveensrinivasan/unicorn/releases
