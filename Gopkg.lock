@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  branch = "master"
+  digest = "1:55100b92ce5481c1263ba4495dde60aeff806852924aaf13e9bb5289576bd423"
+  name = "github.com/99designs/keyring"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "370e8873a8dda4cecfe45812156f80c00d3601c2"
+
+[[projects]]
   digest = "1:9f3b30d9f8e0d7040f729b82dcbc8f0dead820a133b3147ce355fc451f32d761"
   name = "github.com/BurntSushi/toml"
   packages = ["."]
@@ -19,6 +27,55 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:d73d422b7f34d8e930d6d9c3ae6ce5c8f4a2c77e1ea43f7f127a5cd084e32ccb"
+  name = "github.com/aulanov/go.dbus"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "25c3068a42a0b50b877953fb249dbcffc6bd1bca"
+
+[[projects]]
+  digest = "1:586992e81213a853bfe5c102709c0c92020d21b386907ceae783f13bbe899ad7"
+  name = "github.com/danieljoos/wincred"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "412b574fb496839b312a75fba146bd32a89001cf"
+  version = "v1.0.1"
+
+[[projects]]
+  digest = "1:92dfb1cad60fdfecac5def0f398e05b2b92d2422ac6ad2d7d8e4bdb6057a3d83"
+  name = "github.com/dvsekhvalnov/jose2go"
+  packages = [
+    ".",
+    "aes",
+    "arrays",
+    "base64url",
+    "compact",
+    "kdf",
+    "keys/ecc",
+    "padding",
+  ]
+  pruneopts = "UT"
+  revision = "f21a8cedbbae609f623613ec8f81125c243212e6"
+  version = "v1.3"
+
+[[projects]]
+  digest = "1:b3d20bcdedab2050e6bc58e52f4fdc46f710b4c74e1a1ecee262ebec1aee7b6e"
+  name = "github.com/godbus/dbus"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2ff6f7ffd60f0f2410b3105864bdd12c7894f844"
+  version = "v5.0.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:36f5bd9b89fcd728488eee3a0cf8787448579ac381fded60edd6e3ac01fe1a38"
+  name = "github.com/gsterjov/go-libsecret"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a6f4afe4910cad8688db3e0e9b9ac92ad22d54e1"
+
+[[projects]]
+  branch = "master"
   digest = "1:0f65b10afa740ebce239838198b7647ca95c6395738bbaec5748aceece17b07c"
   name = "github.com/jinzhu/configor"
   packages = ["."]
@@ -26,17 +83,53 @@
   revision = "4edaf76fe18865e36de734d887f4c01bd05707af"
 
 [[projects]]
-  digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
+  branch = "master"
+  digest = "1:00e5d2ab594acd9a96265e8e6a46bbf07f0cfcbe20f0e8e415eb80536b1b7ccf"
+  name = "github.com/keybase/go-keychain"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f1daa725cce4049b1715f1e97d6a51880e401e70"
+
+[[projects]]
+  digest = "1:78bbb1ba5b7c3f2ed0ea1eab57bdd3859aec7e177811563edc41198a760b06af"
+  name = "github.com/mitchellh/go-homedir"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ae18d6b8b3205b561c79e8e5f69bff09736185f4"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:38f553aff0273ad6f367cb0a0f8b6eecbaef8dc6cb8b50e57b6a81c1d5b1e332"
+  name = "golang.org/x/crypto"
+  packages = ["ssh/terminal"]
+  pruneopts = "UT"
+  revision = "505ab145d0a99da450461ae2c1a9f6cd10d1f447"
+
+[[projects]]
+  branch = "master"
+  digest = "1:3d5e79e10549fd9119cbefd614b6d351ef5bd0be2f2b103a4199788e784cbc68"
+  name = "golang.org/x/sys"
+  packages = [
+    "unix",
+    "windows",
+  ]
+  pruneopts = "UT"
+  revision = "b4a75ba826a64a70990f11a225237acd6ef35c9f"
+
+[[projects]]
+  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
-  version = "v2.2.1"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
+  version = "v2.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/99designs/keyring",
     "github.com/atotto/clipboard",
     "github.com/jinzhu/configor",
   ]

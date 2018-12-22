@@ -10,10 +10,13 @@ The server settings are in `settings.yaml`.
 domain: box.email.xyz
 username: user@email.xyz
 emaildomain : email.xyz
-password: password
 ```
 
-This will generate a random email alias based on the settings `87AA8A3D-4385-348F-CDB6-3FE9617A22E4@email.xyz` 
+## password
+The password is not retrieved from the  OSX `keychain` and not stored in the config file as it posses
+a big vulnerability. The assumption is that the `keychain` has password for the `username` in the `settings.yaml`.
+
+This will generate a random email alias based on the settings `87AA8A3D4385348FCDB63FE9617A22E4@email.xyz` 
 mapping a forward to the original email address which is also in the `settings.yaml`.
 
 ## Download

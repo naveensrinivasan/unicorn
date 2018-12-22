@@ -1,6 +1,5 @@
 ---
-domain: box.email.xyz
-username: user@email.xyz
-emaildomain: email.xyz
-password: password
+domain: box.turris.xyz
+username: naveen@turris.xyz
+emaildomain: turris.xyz
 

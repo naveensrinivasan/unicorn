@@ -5,20 +5,19 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/99designs/keyring"
 	"github.com/atotto/clipboard"
+	"github.com/jinzhu/configor"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 	"time"
-
-	"github.com/jinzhu/configor"
 )
 
 type configuration struct {
 	Domain      string
 	UserName    string
-	Password    string
 	EmailDomain string
 }
 type handle []struct {
@@ -38,8 +37,13 @@ func main() {
 	if e != nil {
 		log.Fatal(e)
 	}
-	aliases := getEmailAliases(config)
-	e, result := generateRandomEmail(aliases, config)
+	ring, _ := keyring.Open(keyring.Config{})
+	password, e := ring.Get(config.UserName)
+	if e != nil {
+		log.Fatal(e)
+	}
+	aliases := getEmailAliases(config, string(password.Data))
+	e, result := generateRandomEmail(aliases, config, string(password.Data))
 	if e != nil {
 		log.Fatal(e)
 	}
@@ -48,7 +52,8 @@ func main() {
 }
 
 func generateRandomEmail(aliases map[string]interface{},
-	config configuration) (error, string) {
+	config configuration, password string) (error, string) {
+
 	for i := 0; i < 5; i++ {
 		uuid := pseudoUuid()
 		if _, ok := aliases[uuid]; !ok {
@@ -62,7 +67,8 @@ func generateRandomEmail(aliases map[string]interface{},
 				fmt.Sprintf("https://%s/admin/mail/aliases/add",
 					config.Domain),
 				body)
-			req.SetBasicAuth(config.UserName, config.Password)
+			fmt.Println(password)
+			req.SetBasicAuth(config.UserName, password)
 			req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 			resp, err := client.Do(req)
 			if err != nil {
@@ -76,14 +82,14 @@ func generateRandomEmail(aliases map[string]interface{},
 	return errors.New("could not generate random email address"), ""
 }
 
-func getEmailAliases(config configuration) map[string]interface{} {
+func getEmailAliases(config configuration, password string) map[string]interface{} {
 	url := fmt.Sprintf("https://%s/admin/mail/aliases?format=json", config.Domain)
 	spaceClient := http.Client{Timeout: time.Second * 5}
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	req.SetBasicAuth(config.UserName, config.Password)
+	req.SetBasicAuth(config.UserName, password)
 	res, getErr := spaceClient.Do(req)
 	if getErr != nil {
 		log.Fatal(getErr)
@@ -112,6 +118,6 @@ func pseudoUuid() (uuid string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	uuid = fmt.Sprintf("%X-%X-%X-%X-%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+	uuid = fmt.Sprintf("%X%X%X%X%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
 	return
 }
