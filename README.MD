@@ -13,7 +13,7 @@ emaildomain : email.xyz
 ```
 
 ## password
-The password is not retrieved from the  OSX `keychain` and not stored in the config file as it posses
+The password is retrieved from the  OSX `keychain` and it is not stored in the config file as it posses
 a big vulnerability. The assumption is that the `keychain` has password for the `username` in the `settings.yaml`.
 
 This will generate a random email alias based on the settings `87AA8A3D4385348FCDB63FE9617A22E4@email.xyz` 
