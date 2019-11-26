@@ -43,7 +43,7 @@ func main() {
 		log.Fatal(e)
 	}
 	aliases := getEmailAliases(config, string(password.Data))
-	e, result := generateRandomEmail(aliases, config, string(password.Data))
+	result, e := generateRandomEmail(aliases, config, string(password.Data))
 	if e != nil {
 		log.Fatal(e)
 	}
@@ -51,11 +51,10 @@ func main() {
 	log.Println(result)
 }
 
-func generateRandomEmail(aliases map[string]interface{},
-	config configuration, password string) (error, string) {
+func generateRandomEmail(aliases map[string]interface{}, config configuration, password string) (string, error) {
 
 	for i := 0; i < 5; i++ {
-		uuid := pseudoUuid()
+		uuid := pseudoUUID()
 		if _, ok := aliases[uuid]; !ok {
 			log.Println("Can generate a new email address", uuid)
 			client := &http.Client{}
@@ -76,10 +75,10 @@ func generateRandomEmail(aliases map[string]interface{},
 			}
 			bodyText, err := ioutil.ReadAll(resp.Body)
 			log.Printf("%s\n", string(bodyText))
-			return nil, fmt.Sprintf("%s@%s", uuid, config.EmailDomain)
+			return fmt.Sprintf("%s@%s", uuid, config.EmailDomain), nil
 		}
 	}
-	return errors.New("could not generate random email address"), ""
+	return "", errors.New("could not generate random email address")
 }
 
 func getEmailAliases(config configuration, password string) map[string]interface{} {
@@ -112,12 +111,11 @@ func getEmailAliases(config configuration, password string) map[string]interface
 	return aliases
 }
 
-func pseudoUuid() (uuid string) {
+func pseudoUUID() string {
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
 	if err != nil {
 		log.Fatal(err)
 	}
-	uuid = fmt.Sprintf("%X%X%X%X%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
-	return
+	return fmt.Sprintf("%X%X%X%X%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
 }
